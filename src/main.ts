@@ -19,7 +19,7 @@ async function main() {
     console.log("Running in DryRun MODE...");
   }
   console.log(`Action: '${config.action}' on '${config.protocol}' port '${config.port}' to firewall '${config.firewallName}'`)
-
+  console.log('typeof port: ', typeof config.port)
   const client = getDOClient(config);
   const firewall = await getFirewall(client, config.firewallName);
   printFirewallRules(firewall.inbound_rules, "(original)");
