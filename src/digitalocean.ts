@@ -78,6 +78,22 @@ function applyRule(config: ActionConfig, rule: IFirewallInboundRule = { protocol
 
 export function generateInboundRules(oldRules: IFirewallInboundRule[] = [], config: ActionConfig): IFirewallInboundRule[] {
   const { port, action, protocol } = config;
+  
+  // Si es remove, solo modificamos la regla específica que coincida con el puerto y protocolo
+  if (action === "remove") {
+    return oldRules.map(rule => {
+      if (rule.ports === port.toString() && rule.protocol === protocol) {
+        const updatedRule = { ...rule };
+        if (updatedRule.sources?.addresses) {
+          updatedRule.sources.addresses = updatedRule.sources.addresses.filter(address => address !== config.IP);
+        }
+        return updatedRule;
+      }
+      return rule;
+    });
+  }
+
+  // Para el caso de "add", mantenemos la lógica original
   const existingRules = oldRules.filter(r => r.ports == port.toString() && r.protocol == protocol);
   const otherRules = oldRules.filter(r => r.ports != port.toString() || r.protocol != protocol);
 

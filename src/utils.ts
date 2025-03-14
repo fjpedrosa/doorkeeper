@@ -27,8 +27,8 @@ export async function getConfig(): Promise<ActionConfig> {
     throw new Error(`The input 'actionToDo' must one of these values: 'add' or 'remove'. Current value: '${action}'`);
   }
 
-  const port = parseInt(core.getInput("port"));
-  if (core.getInput("port").length == 0 || port <= 0) {
+  const port = Number(core.getInput("port"));
+  if (isNaN(port)|| port <= 0) {
     throw new Error("The input 'port' must be a number greater than 0.");
   }
 
