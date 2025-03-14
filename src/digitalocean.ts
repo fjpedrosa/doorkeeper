@@ -3,7 +3,8 @@ import { IListRequest } from "dots-wrapper/dist/types/list-request";
 
 import { ActionConfig } from "./utils";
 
-import { IFirewallInboundRule, IFirewallOutboundRule } from "dots-wrapper/dist/modules/firewall";
+// import { IFirewallInboundRule, IFirewallOutboundRule } from "dots-wrapper/dist/modules/firewall";
+import { IFirewallInboundRule, IFirewallOutboundRule } from "dots-wrapper/dist/firewall";
 import { config } from "process";
 
 
@@ -66,7 +67,7 @@ function applyRule(config: ActionConfig, rule: IFirewallInboundRule = { protocol
       addresses.push(IP);
     }
   } else if (action == "remove") {
-    cloneRule.sources.addresses = addresses.filter(address => address != IP);
+    cloneRule.sources.addresses = addresses.filter((address: string) => address != IP);
   }
 
   if(cloneRule.sources?.addresses.length === 0 && (!cloneRule.sources?.droplet_ids || cloneRule.sources.droplet_ids.length === 0)) {
@@ -85,7 +86,7 @@ export function generateInboundRules(oldRules: IFirewallInboundRule[] = [], conf
       if (rule.ports === port.toString() && rule.protocol === protocol) {
         const updatedRule = { ...rule };
         if (updatedRule.sources?.addresses) {
-          updatedRule.sources.addresses = updatedRule.sources.addresses.filter(address => address !== config.IP);
+          updatedRule.sources.addresses = updatedRule.sources.addresses.filter((address: string) => address !== config.IP);
         }
         return updatedRule;
       }
@@ -137,7 +138,7 @@ export async function updateInboundRules(
     id: firewall.id,
     name: firewall.name,
     status: firewall.status,
-    created_at: firewall.created_at
+    // created_at: firewall.created_at
   };
 
   try {
