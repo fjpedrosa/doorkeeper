@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/patoroco/doorkeeper.git"
+    "url": "git+https://github.com/fjpedrosa/doorkeeper.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/patoroco/doorkeeper/issues"
+    "url": "https://github.com/fjpedrosa/doorkeeper/issues"
   },
-  "homepage": "https://github.com/patoroco/doorkeeper#readme",
+  "homepage": "https://github.com/fjpedrosa/doorkeeper#readme",
   "dependencies": {
     "@actions/core": "^1.6.0",
     "@actions/github": "^4.0.0",
